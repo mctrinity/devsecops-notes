@@ -1,0 +1,18 @@
+{
+    "resource": {
+      "type": "aws_iam_policy",
+      "config": {
+        "policy": {
+          "Document": {
+            "Statement": [
+              {
+                "Action": "*",
+                "Effect": "Allow",
+                "Resource": "*"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }

@@ -1,0 +1,8 @@
+{
+    "resource": {
+      "type": "aws_s3_bucket",
+      "config": {
+        "public": true
+      }
+    }
+  }
