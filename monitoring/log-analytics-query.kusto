@@ -1,0 +1,19 @@
+// File: log-analytics-query.kusto
+
+// Returns the average CPU usage over the past hour per VM
+Perf
+| where ObjectName == "Processor" and CounterName == "% Processor Time"
+| summarize AvgCPU = avg(CounterValue) by bin(TimeGenerated, 5m), Computer
+| order by TimeGenerated desc
+
+// Returns container restart counts (for AKS, if logs are collected)
+KubePodInventory
+| where RestartCount > 0
+| summarize Restarts = sum(RestartCount) by bin(TimeGenerated, 1h), Name, Namespace
+| order by Restarts desc
+
+// Failed login attempts from Azure Activity logs
+AzureActivity
+| where ActivityStatus == "Failed" and OperationName contains "Sign-in"
+| summarize Attempts = count() by Caller, bin(TimeGenerated, 1h)
+| order by Attempts desc

@@ -1,0 +1,35 @@
+{
+    "version": "Notebook/1.0",
+    "items": [
+      {
+        "type": 1,
+        "content": {
+          "json": {
+            "version": "KqlItem/1.0",
+            "query": "Heartbeat | summarize HeartbeatCount = count() by bin(TimeGenerated, 5m), Computer",
+            "size": 1,
+            "title": "Heartbeat Count by Computer",
+            "timeContext": {
+              "durationMs": 3600000
+            },
+            "visualization": "timechart"
+          }
+        }
+      },
+      {
+        "type": 1,
+        "content": {
+          "json": {
+            "version": "KqlItem/1.0",
+            "query": "Perf | where CounterName == \"% Processor Time\" | summarize avg(CounterValue) by bin(TimeGenerated, 5m), Computer",
+            "size": 1,
+            "title": "Average CPU Usage",
+            "timeContext": {
+              "durationMs": 3600000
+            },
+            "visualization": "linechart"
+          }
+        }
+      }
+    ]
+  }
