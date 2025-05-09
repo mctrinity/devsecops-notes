@@ -1,0 +1,25 @@
+# Trivy Configuration File
+# Place this alongside your Dockerfile for consistent scanning.
+
+scan:
+  skip-dirs:
+    - /test-data
+  skip-files:
+    - README.md
+
+vulnerability:
+  ignore-unfixed: true
+  severity:
+    - CRITICAL
+    - HIGH
+
+output:
+  format: table
+
+cache:
+  backend: filesystem
+  dir: ".trivycache"
+
+# Example to customize more formats or enable GitHub advisories
+# db:
+#   repository: ghcr.io/aquasecurity/trivy-db
